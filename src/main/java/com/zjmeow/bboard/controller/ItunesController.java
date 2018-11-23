@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ItunesController {
     private final StringRedisTemplate stringRedisTemplate;
 
-
     @Autowired
     public ItunesController(StringRedisTemplate stringRedisTemplate) {
         this.stringRedisTemplate = stringRedisTemplate;
@@ -24,7 +23,6 @@ public class ItunesController {
     @GetMapping("/itunes")
     public String getItunes() {
         String response = stringRedisTemplate.opsForValue().get("itunes");
-        log.info(response);
         return response;
     }
 

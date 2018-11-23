@@ -1,13 +1,16 @@
 spring:
   #datasource
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/bboard_dev?useSSL=true&charset="utf8"
+    url: jdbc:mysql://127.0.0.1:3306/bboard_dev?useSSL=true&charset=utf8&serverTimezone=GMT
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     name: dataSource
 
+
   # redis
   redis:
     host: 127.0.0.1
     port: 6379
+mybatis:
+  mapperLocations: classpath:com/zjmeow/bboard/dao/*.xml
