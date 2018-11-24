@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjmeow.bboard.dao.SongSingerMapper">
-    <resultMap id="BaseResultMap" type="com.zjmeow.bboard.model.dto.SongSinger">
+    <resultMap id="BaseResultMap" type="com.zjmeow.bboard.model.po.SongSinger">
         <result column="song_id" jdbcType="INTEGER" property="songId"/>
         <result column="singer_id" jdbcType="INTEGER" property="singerId"/>
     </resultMap>
@@ -38,7 +38,7 @@
     <sql id="Base_Column_List">
     song_id, singer_id
   </sql>
-    <select id="selectByExample" parameterType="com.zjmeow.bboard.model.dto.SongSingerExample"
+    <select id="selectByExample" parameterType="com.zjmeow.bboard.model.po.SongSingerExample"
             resultMap="BaseResultMap">
         select
         <if test="distinct">
@@ -53,7 +53,7 @@
             order by ${orderByClause}
         </if>
     </select>
-    <select id="countByExample" parameterType="com.zjmeow.bboard.model.dto.SongSingerExample"
+    <select id="countByExample" parameterType="com.zjmeow.bboard.model.po.SongSingerExample"
             resultType="java.lang.Long">
         select count(*) from song_singer
         <if test="_parameter != null">

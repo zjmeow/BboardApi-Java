@@ -1,7 +1,7 @@
 package com.zjmeow.bboard.dao;
 
-import com.zjmeow.bboard.model.dto.SongSinger;
-import com.zjmeow.bboard.model.dto.SongSingerExample;
+import com.zjmeow.bboard.model.po.SongSinger;
+import com.zjmeow.bboard.model.po.SongSingerExample;
 
 import java.util.List;
 

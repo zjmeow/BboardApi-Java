@@ -1,4 +1,4 @@
-package com.zjmeow.bboard.model.dto;
+package com.zjmeow.bboard.model.po;
 
 import java.util.ArrayList;
 import java.util.List;

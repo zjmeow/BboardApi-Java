@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjmeow.bboard.dao.BillboardMapper">
-    <resultMap id="BaseResultMap" type="com.zjmeow.bboard.model.dto.Billboard">
+    <resultMap id="BaseResultMap" type="com.zjmeow.bboard.model.po.Billboard">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="previous" jdbcType="INTEGER" property="previous"/>
         <result column="weeks" jdbcType="INTEGER" property="weeks"/>
@@ -43,7 +43,7 @@
     <sql id="Base_Column_List">
     id, previous, weeks, peak, rank, date, song_id
   </sql>
-    <select id="selectByExample" parameterType="com.zjmeow.bboard.model.dto.BillboardExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.zjmeow.bboard.model.po.BillboardExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
@@ -63,7 +63,7 @@
         from billboard
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="countByExample" parameterType="com.zjmeow.bboard.model.dto.BillboardExample"
+    <select id="countByExample" parameterType="com.zjmeow.bboard.model.po.BillboardExample"
             resultType="java.lang.Long">
         select count(*) from billboard
         <if test="_parameter != null">
