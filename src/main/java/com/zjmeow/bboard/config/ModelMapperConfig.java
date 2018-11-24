@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @deprecated swagger2 文档配置
+ * @description: swagger2 文档配置
  **/
 @Configuration
 public class ModelMapperConfig {

@@ -5,7 +5,6 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
-    name: dataSource
 
 
   # redis
@@ -14,3 +13,6 @@ spring:
     port: 6379
 mybatis:
   mapperLocations: classpath:com/zjmeow/bboard/dao/*.xml
+  typeAliasesPackage: com.zjmeow/bboard/model/po
+  configuration:
+    map-underscore-to-camel-case: true

@@ -13,4 +13,5 @@ public class BillboardListVO {
     private Integer rank;
     private Date date;
     private Integer songId;
+    private String title;
 }
