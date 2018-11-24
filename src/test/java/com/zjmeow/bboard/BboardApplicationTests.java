@@ -15,7 +15,7 @@ public class BboardApplicationTests {
     SqlSession session;
     @Test
     public void contextLoads() {
-        System.out.println(session.getMapper(SongMapper.class).selectByPrimaryKey(150));
+        System.out.println(session.getMapper(SongMapper.class));
     }
 
 }

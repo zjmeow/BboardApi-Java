@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author
@@ -18,4 +19,5 @@ public class Singer implements Serializable {
     private String type;
     private Date born;
     private String info;
+    private List<Song> songs;
 }
