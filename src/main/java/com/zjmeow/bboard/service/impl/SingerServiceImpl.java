@@ -5,6 +5,7 @@ import com.zjmeow.bboard.dao.SongMapper;
 import com.zjmeow.bboard.model.vo.SingerDetailVO;
 import com.zjmeow.bboard.model.vo.SingerListVO;
 import com.zjmeow.bboard.service.SingerService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@Slf4j
 public class SingerServiceImpl implements SingerService {
     private final SongMapper songMapper;
     private final ModelMapper modelMapper;
@@ -26,6 +28,7 @@ public class SingerServiceImpl implements SingerService {
 
     @Override
     public List<SingerListVO> searchSinger(String name) {
+
         return null;
     }
 

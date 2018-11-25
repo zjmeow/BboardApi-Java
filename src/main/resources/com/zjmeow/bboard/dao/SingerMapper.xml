@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjmeow.bboard.dao.SingerMapper">
-    
+
+
+    <select id="selectSingerByName" resultType="Singer">
+        SELECT
+            id,
+            name,
+            image
+        FROM singer
+        WHERE name LIKE #{name};
+    </select>
+
+    <select id="selectSingerBySongId" resultType="Singer">
+        SELECT
+            singer.id,
+            singer.name,
+            singer.image
+        FROM singer, song_singer
+        WHERE song_singer.song_id = #{songId} AND
+              song_singer.singer_id = singer.id
+    </select>
+
 </mapper>

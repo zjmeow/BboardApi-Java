@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjmeow.bboard.dao.SongMapper">
+    <resultMap id="songList" type="Song">
+        <collection property="singers" columnPrefix="singer_" javaType="Singer">
+            <result column="id" property="id"/>
+            <result column="name" property="name"/>
+        </collection>
 
+    </resultMap>
+    <select id="selectSongBySingerId" resultType="Song">
+        SELECT
+            id,
+            title
+        FROM song, song_singer
+        WHERE song_singer.singer_id = #{singerId} AND song.id = song_singer.song_id;
+    </select>
 
+    <select id="selectSongByTitle" resultMap="songList">
+        SELECT
+            song.id,
+            song.title,
+            singer.name AS singer_name,
+            singer.id   AS singer_id
+        FROM song, singer, song_singer
+        WHERE song.id = song_singer.song_id AND singer.id = song_singer.singer_id
+              AND
+              song.title LIKE #{title};
+    </select>
 
+    <select id="selectSongById" resultType="Song">
+        SELECT
+            id,
+            title
+        FROM song
+        WHERE song.id = #{id}
+    </select>
 </mapper>

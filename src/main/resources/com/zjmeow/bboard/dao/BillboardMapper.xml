@@ -14,7 +14,23 @@
         FROM
         billboard, song
         WHERE billboard.song_id = song.id
-        ORDER BY date
+        ORDER BY date DESC
         LIMIT 100;
+    </select>
+
+    <select id="selectRankBySongId" resultType="Billboard">
+        SELECT
+        billboard.id,
+        previous,
+        weeks,
+        peak,
+        rank,
+        date,
+        song_id
+        FROM
+        billboard
+        WHERE billboard.song_id = #{songId}
+        ORDER BY date;
+
     </select>
 </mapper>
