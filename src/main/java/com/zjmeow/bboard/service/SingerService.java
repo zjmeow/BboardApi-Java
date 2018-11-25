@@ -10,7 +10,7 @@ import java.util.List;
 public interface SingerService {
     List<SingerListVO> searchSinger(String name);
 
-    List<SingerListVO> getSinger(Date date);
+    List<SingerListVO> getSingerByBorn(Date date);
 
     SingerDetailVO getSingerDetail(Integer id);
 }

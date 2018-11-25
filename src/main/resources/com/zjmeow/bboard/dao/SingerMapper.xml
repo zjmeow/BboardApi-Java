@@ -34,6 +34,17 @@
         FROM singer
         WHERE id = #{id}
     </select>
-
+    <select id="selectSingerByBorn" resultType="Singer">
+        SELECT
+            id,
+            name,
+            image,
+            area,
+            born,
+            info,
+            type
+        FROM singer
+        WHERE born LIKE #{born}
+    </select>
 
 </mapper>

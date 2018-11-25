@@ -12,4 +12,5 @@ public interface SingerMapper {
 
     List<Singer> selectSingerByName(String name);
 
+    List<Singer> selectSingerByBorn(String born);
 }

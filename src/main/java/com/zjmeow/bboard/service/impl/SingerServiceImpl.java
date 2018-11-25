@@ -15,6 +15,7 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -41,8 +42,14 @@ public class SingerServiceImpl implements SingerService {
     }
 
     @Override
-    public List<SingerListVO> getSinger(Date date) {
-        return null;
+    public List<SingerListVO> getSingerByBorn(Date date) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
+        String born = sdf.format(date);
+        List<Singer> singers = singerMapper.selectSingerByBorn("%" + born + "%");
+        List<SingerListVO> singerListVOS = modelMapper.map(singers, new TypeToken<List<SingerListVO>>() {
+        }.getType());
+        return singerListVOS;
     }
 
     @Override
