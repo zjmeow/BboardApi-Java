@@ -5,10 +5,12 @@ import com.zjmeow.bboard.dao.SingerMapper;
 import com.zjmeow.bboard.dao.SongMapper;
 import com.zjmeow.bboard.model.po.Singer;
 import com.zjmeow.bboard.model.po.Song;
+import com.zjmeow.bboard.model.vo.ApiResponse;
 import com.zjmeow.bboard.model.vo.SingerDetailVO;
 import com.zjmeow.bboard.model.vo.SingerListVO;
 import com.zjmeow.bboard.model.vo.SongListVO;
 import com.zjmeow.bboard.service.SingerService;
+import com.zjmeow.bboard.util.RestResultGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -34,32 +36,34 @@ public class SingerServiceImpl implements SingerService {
     }
 
     @Override
-    public List<SingerListVO> searchSinger(String name) {
+    public ApiResponse<List<SingerListVO>> searchSinger(String name) {
         List<Singer> singers = singerMapper.selectSingerByName(name + "%");
         List<SingerListVO> singerListVOS = modelMapper.map(singers, new TypeToken<List<SingerListVO>>() {
         }.getType());
-        return singerListVOS;
+        return RestResultGenerator.genResult(singerListVOS, "OK");
     }
 
     @Override
-    public List<SingerListVO> getSingerByBorn(Date date) {
+    public ApiResponse<List<SingerListVO>> getSingerByBorn(Date date) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
         String born = sdf.format(date);
         List<Singer> singers = singerMapper.selectSingerByBorn("%" + born + "%");
         List<SingerListVO> singerListVOS = modelMapper.map(singers, new TypeToken<List<SingerListVO>>() {
         }.getType());
-        return singerListVOS;
+        return RestResultGenerator.genResult(singerListVOS, "OK");
     }
 
     @Override
-    public SingerDetailVO getSingerDetail(Integer id) {
+    public ApiResponse<SingerDetailVO> getSingerDetail(Integer id) {
         Singer singer = singerMapper.selectByPrimaryKey(id);
+
+
         SingerDetailVO singerDetailVO = modelMapper.map(singer, SingerDetailVO.class);
         List<Song> songs = songMapper.selectSongBySingerId(id);
         List<SongListVO> songListVOS = modelMapper.map(songs, new TypeToken<List<SongListVO>>() {
         }.getType());
         singerDetailVO.setSongs(songListVOS);
-        return singerDetailVO;
+        return RestResultGenerator.genResult(singerDetailVO, "OK");
     }
 }

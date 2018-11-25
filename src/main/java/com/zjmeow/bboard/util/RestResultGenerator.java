@@ -10,7 +10,7 @@ public class RestResultGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestResultGenerator.class);
 
     public static <T> ApiResponse<T> genResult(T data, String message) {
-        ApiResponse<T> result = ApiResponse.<T>newInstance();
+        ApiResponse<T> result = ApiResponse.newInstance();
         result.setSuccess(true);
         result.setData(data);
         result.setMessage(message);

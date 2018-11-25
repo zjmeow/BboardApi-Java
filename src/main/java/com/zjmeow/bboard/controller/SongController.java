@@ -1,5 +1,6 @@
 package com.zjmeow.bboard.controller;
 
+import com.zjmeow.bboard.model.vo.ApiResponse;
 import com.zjmeow.bboard.model.vo.SongDetailVO;
 import com.zjmeow.bboard.model.vo.SongListVO;
 import com.zjmeow.bboard.service.SongService;
@@ -21,12 +22,12 @@ public class SongController {
 
 
     @GetMapping("/song/{title}")
-    public List<SongListVO> searchSong(@PathVariable(value = "title") String title) {
+    public ApiResponse<List<SongListVO>> searchSong(@PathVariable(value = "title") String title) {
         return songService.searchSong(title);
     }
 
     @GetMapping("/song/detail/{id}")
-    public SongDetailVO searchSong(@PathVariable(value = "id") Integer id) {
+    public ApiResponse<SongDetailVO> searchSong(@PathVariable(value = "id") Integer id) {
         return songService.getSongDetail(id);
     }
 }

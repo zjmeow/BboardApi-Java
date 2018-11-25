@@ -1,5 +1,6 @@
 package com.zjmeow.bboard.controller;
 
+import com.zjmeow.bboard.model.vo.ApiResponse;
 import com.zjmeow.bboard.model.vo.BillboardListVO;
 import com.zjmeow.bboard.service.BillboardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class BillboardController {
     }
 
     @GetMapping("/billboard")
-    List<BillboardListVO> getRank() {
+    ApiResponse<List<BillboardListVO>> getRank() {
         return billboardService.getBillboard();
     }
 

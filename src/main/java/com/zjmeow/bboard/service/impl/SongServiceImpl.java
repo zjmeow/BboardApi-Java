@@ -6,11 +6,9 @@ import com.zjmeow.bboard.dao.SongMapper;
 import com.zjmeow.bboard.model.po.Billboard;
 import com.zjmeow.bboard.model.po.Singer;
 import com.zjmeow.bboard.model.po.Song;
-import com.zjmeow.bboard.model.vo.BillboardListVO;
-import com.zjmeow.bboard.model.vo.SingerListVO;
-import com.zjmeow.bboard.model.vo.SongDetailVO;
-import com.zjmeow.bboard.model.vo.SongListVO;
+import com.zjmeow.bboard.model.vo.*;
 import com.zjmeow.bboard.service.SongService;
+import com.zjmeow.bboard.util.RestResultGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -38,16 +36,16 @@ public class SongServiceImpl implements SongService {
 
 
     @Override
-    public List<SongListVO> searchSong(String title) {
+    public ApiResponse<List<SongListVO>> searchSong(String title) {
         List<Song> songs = songMapper.selectSongByTitle(title + "%");
         List<SongListVO> songListVOS = modelMapper.map(songs, new TypeToken<List<SongListVO>>() {
         }.getType());
-        return songListVOS;
+        return RestResultGenerator.genResult(songListVOS, "OK");
     }
 
 
     @Override
-    public SongDetailVO getSongDetail(Integer id) {
+    public ApiResponse<SongDetailVO> getSongDetail(Integer id) {
         List<Singer> singers = singerMapper.selectSingerBySongId(id);
         List<Billboard> billboards = billboardMapper.selectRankBySongId(id);
         List<SingerListVO> singerListVOS = modelMapper.map(singers, new TypeToken<List<SingerListVO>>() {
@@ -60,7 +58,7 @@ public class SongServiceImpl implements SongService {
         songDetailVO.setSingers(singerListVOS);
         songDetailVO.setBillboardListVOS(billboardListVOS);
         log.info("" + songDetailVO);
-        return songDetailVO;
+        return RestResultGenerator.genResult(songDetailVO, "OK");
     }
 
 }
