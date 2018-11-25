@@ -3,6 +3,7 @@ package com.zjmeow.bboard.service.impl;
 
 import com.zjmeow.bboard.dao.SingerMapper;
 import com.zjmeow.bboard.dao.SongMapper;
+import com.zjmeow.bboard.exception.ResourceNotFoundException;
 import com.zjmeow.bboard.model.po.Singer;
 import com.zjmeow.bboard.model.po.Song;
 import com.zjmeow.bboard.model.vo.ApiResponse;
@@ -38,6 +39,9 @@ public class SingerServiceImpl implements SingerService {
     @Override
     public ApiResponse<List<SingerListVO>> searchSinger(String name) {
         List<Singer> singers = singerMapper.selectSingerByName(name + "%");
+        if (singers == null) {
+            throw new ResourceNotFoundException();
+        }
         List<SingerListVO> singerListVOS = modelMapper.map(singers, new TypeToken<List<SingerListVO>>() {
         }.getType());
         return RestResultGenerator.genResult(singerListVOS, "OK");
@@ -57,7 +61,9 @@ public class SingerServiceImpl implements SingerService {
     @Override
     public ApiResponse<SingerDetailVO> getSingerDetail(Integer id) {
         Singer singer = singerMapper.selectByPrimaryKey(id);
-
+        if (singer == null) {
+            throw new ResourceNotFoundException();
+        }
 
         SingerDetailVO singerDetailVO = modelMapper.map(singer, SingerDetailVO.class);
         List<Song> songs = songMapper.selectSongBySingerId(id);

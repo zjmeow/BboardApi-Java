@@ -1,6 +1,7 @@
 package com.zjmeow.bboard.service.impl;
 
 import com.zjmeow.bboard.dao.BillboardMapper;
+import com.zjmeow.bboard.exception.ResourceNotFoundException;
 import com.zjmeow.bboard.model.po.Billboard;
 import com.zjmeow.bboard.model.vo.ApiResponse;
 import com.zjmeow.bboard.model.vo.BillboardListVO;
@@ -31,6 +32,10 @@ public class BillboardServiceImpl implements BillboardService {
     @Override
     public ApiResponse<List<BillboardListVO>> getBillboard() {
         List<Billboard> billboards = billboardMapper.selectNewestBillboard();
+        if (billboards == null) {
+            throw new ResourceNotFoundException();
+        }
+
         List<BillboardListVO> billboardListVOS = modelMapper.map(billboards, new TypeToken<List<BillboardListVO>>() {
         }.getType());
         log.info("getBillboard->" + billboardListVOS);
