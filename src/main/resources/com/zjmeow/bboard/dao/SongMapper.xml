@@ -2,18 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjmeow.bboard.dao.SongMapper">
     <resultMap id="songList" type="Song">
-        <collection property="singers" columnPrefix="singer_" javaType="Singer">
-            <result column="id" property="id"/>
-            <result column="name" property="name"/>
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <collection property="singers" columnPrefix="singer_" ofType="Singer">
+            <result column="id" jdbcType="INTEGER" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
         </collection>
-
     </resultMap>
-    <select id="selectSongBySingerId" resultType="Song">
+    <select id="selectSongBySingerId" resultMap="songList">
         SELECT
-            id,
-            title
-        FROM song, song_singer
-        WHERE song_singer.singer_id = #{singerId} AND song.id = song_singer.song_id;
+        song.id,
+        song.title,
+        singer.name AS singer_name,
+        singer.id AS singer_id
+        FROM song, song_singer, singer
+        WHERE song.id = song_singer.song_id AND singer.id = song_singer.singer_id
+        AND singer.id = #{id}
     </select>
 
     <select id="selectSongByTitle" resultMap="songList">

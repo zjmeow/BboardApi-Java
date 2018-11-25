@@ -7,7 +7,7 @@ import java.util.List;
 public interface SongMapper {
     List<Song> selectSongByTitle(String title);
 
-    Song selectSongBySingerId(Integer id);
+    List<Song> selectSongBySingerId(Integer id);
 
     Song selectSongById(Integer id);
 }

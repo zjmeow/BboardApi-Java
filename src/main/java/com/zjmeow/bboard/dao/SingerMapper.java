@@ -9,4 +9,7 @@ public interface SingerMapper {
     Singer selectByPrimaryKey(Integer id);
 
     List<Singer> selectSingerBySongId(Integer songId);
+
+    List<Singer> selectSingerByName(String name);
+
 }

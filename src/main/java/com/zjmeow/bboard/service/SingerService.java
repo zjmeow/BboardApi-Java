@@ -12,5 +12,5 @@ public interface SingerService {
 
     List<SingerListVO> getSinger(Date date);
 
-    SingerDetailVO getSingerDetail(Long id);
+    SingerDetailVO getSingerDetail(Integer id);
 }

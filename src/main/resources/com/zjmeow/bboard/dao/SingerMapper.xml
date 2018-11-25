@@ -22,4 +22,18 @@
               song_singer.singer_id = singer.id
     </select>
 
+    <select id="selectByPrimaryKey" resultType="Singer">
+        SELECT
+            id,
+            name,
+            image,
+            area,
+            born,
+            info,
+            type
+        FROM singer
+        WHERE id = #{id}
+    </select>
+
+
 </mapper>
