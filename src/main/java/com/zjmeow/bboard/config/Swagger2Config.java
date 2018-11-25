@@ -21,14 +21,14 @@ public class Swagger2Config {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.stonymoon.west2.wechat.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.zjmeow.bboard.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("西二在线公众号文档")
+                .title("bboard")
                 .version("1.0")
                 .build();
 
