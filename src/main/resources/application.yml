@@ -1,10 +1,12 @@
+
 spring:
   #datasource
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/bboard_dev?useSSL=true&charset=utf8&serverTimezone=GMT
+    url: jdbc:mysql://127.0.0.1:3306/bboard?useSSL=true&charset=utf8&serverTimezone=GMT
     username: root
-    password: root
+    password: chunxiaoqianhe
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 
 
   # redis
@@ -16,3 +18,8 @@ mybatis:
   typeAliasesPackage: com.zjmeow/bboard/model/po
   configuration:
     map-underscore-to-camel-case: true
+server:
+  servlet:
+    context-path: /v1
+
+

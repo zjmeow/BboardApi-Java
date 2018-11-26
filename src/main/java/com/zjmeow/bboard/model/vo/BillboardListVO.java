@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class BillboardListVO {
@@ -16,4 +17,5 @@ public class BillboardListVO {
     private Integer songId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String title;
+    private List<SingerListVO> singers;
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 import java.util.List;
 
+
 @RestController
 public class SingerController {
     private final SingerService singerService;
@@ -21,17 +22,17 @@ public class SingerController {
         this.singerService = singerService;
     }
 
-    @GetMapping("/singer/{name}")
+    @GetMapping("/search/singers/{name}")
     public ApiResponse<List<SingerListVO>> searchSong(@PathVariable(value = "name") String name) {
         return singerService.searchSinger(name);
     }
 
-    @GetMapping("/singer/detail/{id}")
+    @GetMapping("/singers/{id}")
     public ApiResponse<SingerDetailVO> getSingerDetail(@PathVariable(value = "id") Integer id) {
         return singerService.getSingerDetail(id);
     }
 
-    @GetMapping("/singer/today")
+    @GetMapping("/today/singers")
     public ApiResponse<List<SingerListVO>> getSingerByBorn() {
         return singerService.getSingerByBorn(new Date());
     }

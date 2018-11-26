@@ -21,12 +21,12 @@ public class SongController {
     }
 
 
-    @GetMapping("/song/{title}")
+    @GetMapping("/search/songs/{title}")
     public ApiResponse<List<SongListVO>> searchSong(@PathVariable(value = "title") String title) {
         return songService.searchSong(title);
     }
 
-    @GetMapping("/song/detail/{id}")
+    @GetMapping("/songs/{id}")
     public ApiResponse<SongDetailVO> searchSong(@PathVariable(value = "id") Integer id) {
         return songService.getSongDetail(id);
     }

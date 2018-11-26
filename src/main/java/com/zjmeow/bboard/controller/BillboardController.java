@@ -18,7 +18,7 @@ public class BillboardController {
         this.billboardService = billboardService;
     }
 
-    @GetMapping("/billboard")
+    @GetMapping("/billboards")
     ApiResponse<List<BillboardListVO>> getRank() {
         return billboardService.getBillboard();
     }
