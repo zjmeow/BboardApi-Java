@@ -20,12 +20,12 @@
         SELECT b.id        AS id,
                previous,
                weeks,
+               `rank`,
                peak,
-               rank,
-               date,
+               `date`,
                b.song_id   AS song_id,
-               song.title  as title,
                singer.name AS singer_name,
+               song.title  as title,
                singer.id   AS singer_id
         FROM (SELECT *
               FROM billboard
@@ -45,12 +45,12 @@
         SELECT b.id        AS id,
                previous,
                weeks,
+               `rank`,
                peak,
-               rank,
-               date,
+               `date`,
                b.song_id   AS song_id,
-               song.title  as title,
                singer.name AS singer_name,
+               song.title  as title,
                singer.id   AS singer_id
         FROM (SELECT *
               FROM billboard
