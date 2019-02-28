@@ -1,34 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zjmeow.bboard.dao.BillboardMapper">
-    <select id="selectNewestBillboard" resultType="Billboard">
-        SELECT
-        billboard.id,
-        previous,
-        weeks,
-        peak,
-        rank,
-        date,
-        song_id,
-        song.title
-        FROM
-        billboard, song
-        WHERE billboard.song_id = song.id
-        ORDER BY date DESC
-        LIMIT 100;
+    <resultMap id="billboardList" type="Billboard">
+        <result column="id" jdbcType="INTEGER" property="id"/>
+        <result column="previous" jdbcType="INTEGER" property="previous"/>
+        <result column="weeks" jdbcType="INTEGER" property="weeks"/>
+        <result column="peak" jdbcType="INTEGER" property="peak"/>
+        <result column="rank" jdbcType="INTEGER" property="rank"/>
+        <result column="song_id" jdbcType="INTEGER" property="songId"/>
+        <result column="date" jdbcType="DATE" property="date"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <collection property="singers" columnPrefix="singer_" ofType="Singer">
+            <result column="id" jdbcType="INTEGER" property="id"/>
+            <result column="name" jdbcType="VARCHAR" property="name"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectNewestBillboard" resultMap="billboardList">
+        SELECT b.id        AS id,
+               previous,
+               weeks,
+               peak,
+               rank,
+               date,
+               b.song_id   AS song_id,
+               song.title  as title,
+               singer.name AS singer_name,
+               singer.id   AS singer_id
+        FROM (SELECT *
+              FROM billboard
+              ORDER BY billboard.id DESC
+              LIMIT 100
+             ) AS b,
+             song,
+             song_singer,
+             singer
+        WHERE b.song_id = song.id
+          AND song.id = song_singer.song_id
+          AND singer.id = song_singer.singer_id;
     </select>
 
+
+    <select id="selectBillboardByDate" resultMap="billboardList">
+        SELECT b.id        AS id,
+               previous,
+               weeks,
+               peak,
+               rank,
+               date,
+               b.song_id   AS song_id,
+               song.title  as title,
+               singer.name AS singer_name,
+               singer.id   AS singer_id
+        FROM (SELECT *
+              FROM billboard
+              WHERE date = #{date}
+             ) AS b,
+             song,
+             song_singer,
+             singer
+        WHERE b.song_id = song.id
+          AND song.id = song_singer.song_id
+          AND singer.id = song_singer.singer_id;
+    </select>
+
+
     <select id="selectRankBySongId" resultType="Billboard">
-        SELECT
-        billboard.id,
-        previous,
-        weeks,
-        peak,
-        rank,
-        date,
-        song_id
-        FROM
-        billboard
+        SELECT billboard.id,
+               previous,
+               weeks,
+               peak,
+               rank,
+               date,
+               song_id
+        FROM billboard
         WHERE billboard.song_id = #{songId}
         ORDER BY date;
 

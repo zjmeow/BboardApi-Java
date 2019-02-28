@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author
@@ -19,5 +20,6 @@ public class Billboard implements Serializable {
     private Date date;
     private Integer songId;
     private String title;
+    private List<String> singers;
 
 }

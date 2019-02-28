@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface BillboardService {
     ApiResponse<List<BillboardListVO>> getBillboard();
+
+    ApiResponse<List<BillboardListVO>> getBillboardByDate(String date);
 }

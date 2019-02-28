@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +24,10 @@ public class BillboardServiceImpl implements BillboardService {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public BillboardServiceImpl(BillboardMapper billboardMapper, ModelMapper modelMapper) {
+    public BillboardServiceImpl(BillboardMapper billboardMapper, ModelMapper modelMapper, ElasticsearchTemplate elasticsearchTemplate) {
         this.billboardMapper = billboardMapper;
         this.modelMapper = modelMapper;
+
     }
 
 
@@ -41,4 +43,16 @@ public class BillboardServiceImpl implements BillboardService {
         log.info("getBillboard->" + billboardListVOS);
         return RestResultGenerator.genResult(billboardListVOS, "OK");
     }
+
+    public ApiResponse<List<BillboardListVO>> getBillboardByDate(String date) {
+        List<Billboard> billboards = billboardMapper.selectBillboardByDate(date);
+        if (billboards == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        List<BillboardListVO> billboardListVOS = modelMapper.map(billboards, new TypeToken<List<BillboardListVO>>() {
+        }.getType());
+        return RestResultGenerator.genResult(billboardListVOS, "OK");
+    }
+
 }

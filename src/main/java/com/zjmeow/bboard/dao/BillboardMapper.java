@@ -8,4 +8,6 @@ public interface BillboardMapper {
     List<Billboard> selectNewestBillboard();
 
     List<Billboard> selectRankBySongId(Integer songId);
+
+    List<Billboard> selectBillboardByDate(String date);
 }

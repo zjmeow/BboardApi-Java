@@ -2,12 +2,18 @@
 spring:
   #datasource
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/bboard?useSSL=true&charset=utf8&serverTimezone=GMT
-    username: root
-    password: chunxiaoqianhe
+    url: jdbc:mysql://127.0.0.1:3306/bubble?useSSL=true&charset=utf8&serverTimezone=GMT
+    username: Stony
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-
+  data:
+    elasticsearch:
+      cluster-nodes: localhost:9300
+      properties:
+        transport:
+          tcp:
+            connect_timeout: 120s
 
   # redis
   redis:

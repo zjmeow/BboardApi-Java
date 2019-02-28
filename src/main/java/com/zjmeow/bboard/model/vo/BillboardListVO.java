@@ -15,7 +15,7 @@ public class BillboardListVO {
     private Integer rank;
     private Date date;
     private Integer songId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String title;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<SingerListVO> singers;
 }
