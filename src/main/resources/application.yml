@@ -2,9 +2,9 @@
 spring:
   #datasource
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/bubble?useSSL=true&charset=utf8&serverTimezone=GMT
-    username: Stony
-    password: root
+    url: jdbc:mysql://127.0.0.1:3306/bboard_dev?useSSL=true&charset=utf8&serverTimezone=GMT
+    username: root
+    password: chunxiaoqianhe
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   data:

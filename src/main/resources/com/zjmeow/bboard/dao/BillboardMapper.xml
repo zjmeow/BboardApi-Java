@@ -23,20 +23,18 @@
                `rank`,
                peak,
                `date`,
+               title,
                b.song_id   AS song_id,
                singer.name AS singer_name,
-               song.title  as title,
                singer.id   AS singer_id
         FROM (SELECT *
               FROM billboard
               ORDER BY billboard.id DESC
               LIMIT 100
              ) AS b,
-             song,
              song_singer,
              singer
-        WHERE b.song_id = song.id
-          AND song.id = song_singer.song_id
+        WHERE b.song_id = song_singer.song_id
           AND singer.id = song_singer.singer_id;
     </select>
 
