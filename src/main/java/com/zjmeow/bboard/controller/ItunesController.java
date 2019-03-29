@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+
 @Slf4j
 @Controller
 public class ItunesController {
@@ -27,5 +28,12 @@ public class ItunesController {
         return response;
     }
 
+    // 为了避免重复解析，已经在 redis 中保存好了转成 JSON 的数据，直接返回即可
+    @ResponseBody
+    @GetMapping("/spotify")
+    public String getSpotify() {
+        String response = stringRedisTemplate.opsForValue().get("spotify");
+        return response;
+    }
 
 }

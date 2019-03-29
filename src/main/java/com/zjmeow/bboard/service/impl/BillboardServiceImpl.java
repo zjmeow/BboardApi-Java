@@ -1,5 +1,6 @@
 package com.zjmeow.bboard.service.impl;
 
+import com.zjmeow.bboard.controller.SingerController;
 import com.zjmeow.bboard.dao.BillboardMapper;
 import com.zjmeow.bboard.exception.ResourceNotFoundException;
 import com.zjmeow.bboard.model.po.Billboard;
@@ -22,12 +23,12 @@ public class BillboardServiceImpl implements BillboardService {
 
     private final BillboardMapper billboardMapper;
     private final ModelMapper modelMapper;
-
+    private final SingerController singerController;
     @Autowired
-    public BillboardServiceImpl(BillboardMapper billboardMapper, ModelMapper modelMapper, ElasticsearchTemplate elasticsearchTemplate) {
+    public BillboardServiceImpl(BillboardMapper billboardMapper, ModelMapper modelMapper, ElasticsearchTemplate elasticsearchTemplate, SingerController singerController) {
         this.billboardMapper = billboardMapper;
         this.modelMapper = modelMapper;
-
+        this.singerController = singerController;
     }
 
 
@@ -41,6 +42,7 @@ public class BillboardServiceImpl implements BillboardService {
         List<BillboardListVO> billboardListVOS = modelMapper.map(billboards, new TypeToken<List<BillboardListVO>>() {
         }.getType());
         log.info("getBillboard->" + billboardListVOS);
+        singerController.getSingerByBorn();
         return RestResultGenerator.genResult(billboardListVOS, "OK");
     }
 
